@@ -31,7 +31,7 @@ pipeline {
             steps {
                 echo 'testing'
                 script {
-                    def url = 'https://s3-udemy-jenkins-demo1-yomata.s3.ap-northeast-1.amazonaws.com/index.html
+                    def url = 'https://s3-udemy-jenkins-demo1-yomata.s3.ap-northeast-1.amazonaws.com/index.html'
                     def response = sh(script: "curl -s -o /dev/null -w '%{http_code}' '$url'", returnStdout: true)
 
                     if (response == '200') {
