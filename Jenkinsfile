@@ -27,9 +27,20 @@ pipeline {
             }
         }
         
-        stage('release') {
+        stage('test') {
             steps {
-                echo 'releaseing'
+                echo 'testing'
+                script {
+                    def url = 's3://s3-udemy-jenkins-demo1-yomata/index.html'
+                    def response = sh(script: "curl -s -o /dev/null -w '%{http_code}' '$url'", returnStdout: true)
+
+                    if (response == '200') {
+                        echo 'Test OK'
+                    } else {
+                        echo response
+                        error 'Test NG'
+                    }
+                }
             }
         }
     }
